@@ -1,11 +1,16 @@
 package Banco;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Conta implements ContaIn{
 
 
     protected double saldo = 0;
     protected int agencia;
     protected int numero;
+    protected LocalDateTime dataHorario;
+    protected DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 
     public Conta(){
@@ -22,6 +27,10 @@ public abstract class Conta implements ContaIn{
 
     public int getNumero() {
         return numero;
+    }
+
+    public LocalDateTime getDataHorario(){
+        return dataHorario;
     }
 
 
@@ -56,7 +65,7 @@ public abstract class Conta implements ContaIn{
         System.out.println("===== Extrato Conta =====");
         System.out.println(String.format("Agencia: %d" , this.agencia));
         System.out.println(String.format("Numero: %d" , this.numero));
-        System.out.println(String.format("Saldo: %.2f" , this.saldo));
+        System.out.println(String.format("Saldo: R$%.2f" , this.saldo));
     }
 
 
@@ -83,6 +92,7 @@ public abstract class Conta implements ContaIn{
     public String toString(){
         return "\nnumero da conta: " + getNumero()
               +"\nagencia: " + getAgencia()
-              +"\nsaldo: " + getSaldo();
+              +"\nsaldo: " + getSaldo()
+              +"\nData e hora e criação: " + fmt.format(dataHorario);
     }
 }

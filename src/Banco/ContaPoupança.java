@@ -6,14 +6,12 @@ import java.time.format.DateTimeFormatter;
 public class ContaPoupança extends Conta{
 
     public static int contadorDeContaPoupanca = 100;
-    private DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     public double saldoPoupanca;
     private Conta conta;
 
 
     public ContaPoupança(Conta conta){
-        super();
         this.conta = conta;
     }
 
