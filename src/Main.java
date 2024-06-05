@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("BEM VINDO");
+        System.out.println("BEM VINDO AO BANK THI ENTREPRISE");
         menu();
 
         while (true) {
@@ -47,8 +47,14 @@ public class Main {
                     imprimirExtrato();
                     break;
 
+                case 6:
+                    transferir();
+                    break;
+
                 case 7:
                     loop = false;
+                    System.out.println("Até logo, sistema encerrado");
+                    System.exit(0);
                     break;
 
                 default:
@@ -62,7 +68,7 @@ public class Main {
     public static void menu(){
         System.out.println("===== MENU BANCO THI =====");
         System.out.println("1 - criar conta           =");
-        System.out.println("2 - Listar                 =");
+        System.out.println("2 - Listar                =");
         System.out.println("3 - depositar             =");
         System.out.println("4 - sacar                 =");
         System.out.println("5 - Imprimir Extrato      =");
@@ -136,6 +142,7 @@ public class Main {
 
                     System.out.println("Digite o valor do deposito: ");
                     double valor = input.nextDouble();
+                    input.nextLine();
 
                     conta.depositar(valor);
                 }
@@ -199,6 +206,50 @@ public class Main {
         menu();
     }
 
+    public static void transferir(){
+        if(!contas.isEmpty()){
+            System.out.println("======== TRANSFERIR ========");
+
+            ContaCorrente contaRemetente = null;
+            ContaCorrente contaDestinatario = null;
+            double valor = 0.0;
+
+
+
+            System.out.println("Digite o numero da conta remetente: ");
+            int numeroContaRemetente = input.nextInt();
+            input.nextLine();
+
+            for (Conta c : contas){
+                if (numeroContaRemetente != c.getNumero()){
+                    System.out.println("conta não encotrada no sistema! \n");
+                }else {
+                    contaRemetente = (ContaCorrente) c;
+                    System.out.println(("Digite o valor da sua tranferencia"));
+                    valor = input.nextDouble();
+                }
+            }
+
+            System.out.println("Digite o numero da conta remetente: ");
+            int numeroContaDestinatario = input.nextInt();
+            input.nextLine();
+
+
+            for (Conta c : contas){
+                if (numeroContaDestinatario != c.getNumero()){
+                    System.out.println("conta não encotrada no sistema! \n");
+                }else{
+                    contaDestinatario = (ContaCorrente) c;
+                }
+            }
+
+            Conta.trenferir(contaRemetente,valor,contaDestinatario);
+
+            }else {
+            System.out.println("Nenhuma conta criada! \n");
+        }
+        menu();
+    }
 
 
 }

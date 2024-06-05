@@ -79,10 +79,10 @@ public abstract class Conta implements ContaIn{
             if(valor <= contaRemetente.saldo){
                 contaRemetente.saldo -= valor;
                 contaDestinataria.saldo += valor;
-                System.out.println("Tranferencia da conta " + contaRemetente.numero + " no valor de R$ " + valor + " pra conta " + contaDestinataria.numero +
+                System.out.println("Tranferencia do " + contaRemetente.numero + " no valor de R$ " + valor + " pra conta " + contaDestinataria.numero +
                         " concluida com sucesso");
             }else {
-                System.out.println("saldo insuficiente, operação incerrada!");
+                System.out.println("saldo insuficiente da conta remetente, operação cancelada!");
             }
         }
     }

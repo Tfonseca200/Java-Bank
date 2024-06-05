@@ -15,6 +15,10 @@ public class ContaCorrente extends Conta{
         contadorConta ++;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
     @Override
     public void imprimirExtrato() {
         System.out.println("===== Extrato Conta =====");
@@ -24,6 +28,23 @@ public class ContaCorrente extends Conta{
         System.out.println(String.format("Saldo: R$%.2f" , this.saldo));
     }
 
+
+
+    public static void trenferir(ContaCorrente contaRemetente, double valor,  ContaCorrente contaDestinataria) {
+
+        if(valor <= 0){
+            System.out.println("incorreto , o valor tem que ser positivo!");
+        }else{
+            if(valor <= contaRemetente.saldo){
+                contaRemetente.saldo -= valor;
+                contaDestinataria.saldo += valor;
+                System.out.println("Tranferencia do " + contaRemetente.usuario.getNome() + " no valor de R$ " + valor + " pra conta " + contaDestinataria.usuario.getNome() +
+                        " concluida com sucesso");
+            }else {
+                System.out.println("saldo insuficiente da conta remetente, operação cancelada!");
+            }
+        }
+    }
 
     @Override
     public String toString() {
