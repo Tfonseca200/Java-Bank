@@ -53,7 +53,7 @@ public class Main {
 
                 case 7:
                     loop = false;
-                    System.out.println("Até logo, sistema encerrado");
+                    System.out.println("Até logo, o banco agradeçe!");
                     System.exit(0);
                     break;
 
@@ -133,11 +133,11 @@ public class Main {
             int numero = input.nextInt();
             input.nextLine();
 
+            boolean contaEncontrada = false;
 
             for (Conta c : contas) {
-                if (numero != c.getNumero()) {
-                    System.out.println("conta não encotrada no sistema! \n");
-                } else {
+                if (numero == c.getNumero()) {
+
                     Conta conta = c;
 
                     System.out.println("Digite o valor do deposito: ");
@@ -145,7 +145,14 @@ public class Main {
                     input.nextLine();
 
                     conta.depositar(valor);
+                    contaEncontrada = true;
+                    break;
+
                 }
+            }
+
+            if(!contaEncontrada) {
+                System.out.println("conta não encotrada no sistema! \n");
             }
 
         }else {
@@ -165,18 +172,29 @@ public class Main {
             input.nextLine();
 
 
+            boolean contaEncontrada = false;
+
+
             for (Conta c : contas) {
-                if (numero != c.getNumero()) {
-                    System.out.println("conta não encotrada no sistema! \n");
-                } else {
+                if (numero == c.getNumero()) {
+
                     Conta conta = c;
 
                     System.out.println("Digite o valor do saque: ");
                     double valor = input.nextDouble();
 
                     conta.sacar(valor);
+                    contaEncontrada = true;
+                    break;
+
                 }
             }
+
+
+            if(!contaEncontrada) {
+                System.out.println("conta não encotrada no sistema! \n");
+            }
+
         }else {
             System.out.println("Nenhuma conta criada! \n");
         }
@@ -191,15 +209,22 @@ public class Main {
             int numero = input.nextInt();
             input.nextLine();
 
-            for (Conta c : contas) {
-                if (numero != c.getNumero()) {
-                    System.out.println("conta não encotrada no sistema! \n");
-                } else {
-                    Conta conta = c;
+            boolean contaEncontrada = false;
 
+
+            for (Conta c : contas) {
+                if (numero == c.getNumero()) {
+                    Conta conta = c;
                     c.imprimirExtrato();
+                    contaEncontrada = true;
+                    break;
                 }
             }
+
+            if(!contaEncontrada) {
+                System.out.println("conta não encotrada no sistema! \n");
+            }
+
         }else {
             System.out.println("Nenhuma conta criada! \n");
         }
@@ -208,6 +233,8 @@ public class Main {
 
     public static void transferir(){
         if(!contas.isEmpty()){
+
+
             System.out.println("======== TRANSFERIR ========");
 
             ContaCorrente contaRemetente = null;
@@ -220,33 +247,62 @@ public class Main {
             int numeroContaRemetente = input.nextInt();
             input.nextLine();
 
+            boolean contaRemetenteEncontrada = false;
+
             for (Conta c : contas){
-                if (numeroContaRemetente != c.getNumero()){
-                    System.out.println("conta não encotrada no sistema! \n");
-                }else {
+                if (numeroContaRemetente == c.getNumero()){
+
                     contaRemetente = (ContaCorrente) c;
-                    System.out.println(("Digite o valor da sua tranferencia"));
-                    valor = input.nextDouble();
+                    contaRemetenteEncontrada = true;
+                    break;
                 }
             }
+
+
+            System.out.println(("Digite o valor da sua tranferencia"));
+            valor = input.nextDouble();
+            input.nextLine();
+
+
 
             System.out.println("Digite o numero da conta remetente: ");
             int numeroContaDestinatario = input.nextInt();
             input.nextLine();
 
 
-            for (Conta c : contas){
-                if (numeroContaDestinatario != c.getNumero()){
-                    System.out.println("conta não encotrada no sistema! \n");
-                }else{
+
+            boolean contaDestinatariaEncontrada = false;
+
+
+            for (Conta c : contas) {
+                if (numeroContaDestinatario == c.getNumero() && numeroContaRemetente != c.getNumero()) {
                     contaDestinatario = (ContaCorrente) c;
+                    Conta.trenferir(contaRemetente, valor, contaDestinatario);
+                    contaDestinatariaEncontrada = true;
+                    break;
+
+                } else if (numeroContaRemetente == numeroContaDestinatario) {
+                    System.out.println("invalido! mesmo numero da conta destinatario");
+                    contaDestinatariaEncontrada = true;
+                    break;
+
                 }
             }
 
-            Conta.trenferir(contaRemetente,valor,contaDestinatario);
 
-            }else {
-            System.out.println("Nenhuma conta criada! \n");
+
+            if (!contaRemetenteEncontrada){
+                System.out.println("conta remetente não encotrada no sistema! \n");
+            }
+
+            if (!contaDestinatariaEncontrada) {
+                System.out.println("conta destinataria não encotrada no sistema! \n");
+            }
+
+
+
+        }else {System.out.println("Nenhuma conta criada! \n");
+
         }
         menu();
     }
