@@ -11,7 +11,7 @@ public class ContaCorrente extends Conta{
         this.usuario = usuario;
         super.dataHorario = dataHora;
         super.numero = contadorConta;
-        super.agencia = contadorConta;
+        super.agencia = 1;
         contadorConta ++;
     }
 
@@ -29,20 +29,17 @@ public class ContaCorrente extends Conta{
     }
 
 
-
-    public static void trenferir(ContaCorrente contaRemetente, double valor,  ContaCorrente contaDestinataria) {
-
-        if(valor <= 0){
-            System.out.println("incorreto , o valor tem que ser positivo!");
-        }else{
-            if(valor <= contaRemetente.saldo){
-                contaRemetente.saldo -= valor;
-                contaDestinataria.saldo += valor;
-                System.out.println("Tranferencia do " + contaRemetente.usuario.getNome() + " no valor de R$ " + valor + " pra conta " + contaDestinataria.usuario.getNome() +
-                        " concluida com sucesso");
-            }else {
-                System.out.println("saldo insuficiente da conta remetente, operação cancelada!");
-            }
+    @Override
+    public void transferir(double valor, ContaCorrente contaDestinataria) {
+        if (valor <= 0) {
+            System.out.println("Valor incorreto, o valor tem que ser positivo!");
+        } else if (valor <= this.saldo) {
+            this.saldo -= valor;
+            contaDestinataria.saldo += valor;
+            System.out.println("Transferência do " + this.usuario.getNome() + " no valor de R$ " + valor + " para a conta " + contaDestinataria.usuario.getNome()+
+                    " concluída com sucesso");
+        } else {
+            System.out.println("Saldo insuficiente na conta remetente, operação cancelada!");
         }
     }
 

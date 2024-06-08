@@ -264,28 +264,18 @@ public class Main {
             input.nextLine();
 
 
-
             System.out.println("Digite o numero da conta remetente: ");
             int numeroContaDestinatario = input.nextInt();
             input.nextLine();
-
-
 
             boolean contaDestinatariaEncontrada = false;
 
 
             for (Conta c : contas) {
                 if (numeroContaDestinatario == c.getNumero() && numeroContaRemetente != c.getNumero()) {
+                    contaDestinatariaEncontrada = true;
                     contaDestinatario = (ContaCorrente) c;
-                    Conta.trenferir(contaRemetente, valor, contaDestinatario);
-                    contaDestinatariaEncontrada = true;
-                    break;
-
-                } else if (numeroContaRemetente == numeroContaDestinatario) {
-                    System.out.println("invalido! mesmo numero da conta destinatario");
-                    contaDestinatariaEncontrada = true;
-                    break;
-
+                    contaRemetente.transferir(valor, contaDestinatario);
                 }
             }
 
@@ -298,6 +288,9 @@ public class Main {
             if (!contaDestinatariaEncontrada) {
                 System.out.println("conta destinataria não encotrada no sistema! \n");
             }
+
+
+
 
 
 

@@ -70,20 +70,16 @@ public abstract class Conta implements ContaIn{
 
 
 
-
-    public static void trenferir(Conta contaRemetente, double valor,  Conta contaDestinataria) {
-
-        if(valor <= 0){
-            System.out.println("incorreto , o valor tem que ser positivo!");
-        }else{
-            if(valor <= contaRemetente.saldo){
-                contaRemetente.saldo -= valor;
-                contaDestinataria.saldo += valor;
-                System.out.println("Tranferencia do " + contaRemetente.numero + " no valor de R$ " + valor + " pra conta " + contaDestinataria.numero +
-                        " concluida com sucesso");
-            }else {
-                System.out.println("saldo insuficiente da conta remetente, operação cancelada!");
-            }
+    public void transferir(double valor, ContaCorrente contaDestinataria) {
+        if (valor <= 0) {
+            System.out.println("Valor incorreto, o valor tem que ser positivo!");
+        } else if (valor <= this.saldo) {
+            this.saldo -= valor;
+            contaDestinataria.saldo += valor;
+            System.out.println("Transferência da conta  " + this.numero + " no valor de R$ " + valor + " para a conta " + contaDestinataria.numero +
+                    " concluída com sucesso");
+        } else {
+            System.out.println("Saldo insuficiente na conta remetente, operação cancelada!");
         }
     }
 
