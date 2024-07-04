@@ -19,7 +19,7 @@ Simulação de sistema bancario pra entrega de projeto do bootcamp java da santa
 
 - IntelliJ IDEA Community Edition 
 
-## Aréa
+## Área
 
 - Back-end
 
